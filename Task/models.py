@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
@@ -13,11 +14,15 @@ class Position (models.Model):
 
 
 class Worker(AbstractUser):
-    position = models.ForeignKey('Position', on_delete=models.PROTECT)
+    position = models.ForeignKey(
+        Position,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
-        return self.position.name
-
+        return f"{self.username} ({self.position})" if self.position else self.username
 
 
 class TaskType(models.Model):
@@ -49,12 +54,12 @@ class Task(models.Model):
         related_name='tasks'
     )
     created_by = models.ForeignKey(
-        'Worker',
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name='created_tasks'
     )
     assignees = models.ManyToManyField(
-        'Worker',
+        settings.AUTH_USER_MODEL,
         blank=True,
         related_name='assigned_tasks'
     )
@@ -79,7 +84,7 @@ class Tag(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
-    workers = models.ManyToManyField('Worker', blank=True, related_name='teams')
+    workers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='teams')
 
     def __str__(self):
         return self.name
