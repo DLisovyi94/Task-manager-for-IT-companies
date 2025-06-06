@@ -1,0 +1,36 @@
+<ul class="sidebar-nav list-group">
+  {% if user.is_authenticated %}
+    <li class="list-group-item">User: <a href="{{ user.get_absolute_url }}">{{ user.get_username }}</a></li>
+{#    <li class="list-group-item"><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>#}
+{#  {% else %}#}
+{#    <li class="list-group-item"><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>#}
+  {% endif %}
+
+  <br>
+
+ <ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'task:index' %}">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'task:position-list' %}">Positions</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Workers</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Tasks</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Tags</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Teams</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Projects</a>
+  </li>
+</ul>
+
+
+</ul>
