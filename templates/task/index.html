@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Task manager Home page</h1>
+    <p>Welcome to Best Taxi Ever!</p>
+    <h2>Dynamic content</h2>
+    <p>Company overview:</p>
+    <ul>
+        <li><strong>Position:</strong> {{ position }}</li>
+        <li><strong>Worker:</strong> {{ worker }}</li>
+        <li><strong>tasktypes:</strong> {{ tasktypes }}</li>
+        <li><strong>Task:</strong> {{ task }}</li>
+        <li><strong>Tags:</strong> {{ tags }}</li>
+        <li><strong>Team:</strong> {{ team }}</li>
+        <li><strong>projects:</strong> {{ projects }}</li>
+    </ul>
+
+    <p>You have visited this page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+    </p>
+
+{% endblock %}
