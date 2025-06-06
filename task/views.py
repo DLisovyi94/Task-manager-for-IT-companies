@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from Task.models import Position, Worker, TaskType, Task, Tag, Team, Project
+from task.models import Position, Worker, TaskType, Task, Tag, Team, Project
 
 
 @login_required
@@ -39,6 +39,19 @@ class PositionListView(LoginRequiredMixin,ListView):
     model = Position
     context_object_name = "position_list"
     template_name = "task/position_list.html"
+    paginate_by = 5
+
+class WorkerListView(LoginRequiredMixin,ListView):
+    model = Worker
+    context_object_name = "worker_list"
+    template_name = "task/worker_list.html"
+    paginate_by = 5
+
+
+class TaskListView(LoginRequiredMixin,ListView):
+    model = Task
+    context_object_name = "task_list"
+    template_name = "task/task_list.html"
     paginate_by = 5
 
 

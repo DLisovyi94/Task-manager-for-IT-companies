@@ -1,0 +1,297 @@
+[
+
+  {
+    "model": "task.position",
+    "pk": 1,
+    "fields": { "name": "Developer" }
+  },
+  {
+    "model": "task.position",
+    "pk": 2,
+    "fields": { "name": "QA Engineer" }
+  },
+  {
+    "model": "task.position",
+    "pk": 3,
+    "fields": { "name": "Project Manager" }
+  },
+
+
+  {
+    "model": "task.worker",
+    "pk": 1,
+    "fields": {
+      "username": "user1",
+      "password": "pbkdf2_sha256$260000$fakehash1",
+      "first_name": "User",
+      "last_name": "One",
+      "email": "user1@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 1
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 2,
+    "fields": {
+      "username": "user2",
+      "password": "pbkdf2_sha256$260000$fakehash2",
+      "first_name": "User",
+      "last_name": "Two",
+      "email": "user2@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 2
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 3,
+    "fields": {
+      "username": "user3",
+      "password": "pbkdf2_sha256$260000$fakehash3",
+      "first_name": "User",
+      "last_name": "Three",
+      "email": "user3@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 3
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 4,
+    "fields": {
+      "username": "user4",
+      "password": "pbkdf2_sha256$260000$fakehash4",
+      "first_name": "User",
+      "last_name": "Four",
+      "email": "user4@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 1
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 5,
+    "fields": {
+      "username": "user5",
+      "password": "pbkdf2_sha256$260000$fakehash5",
+      "first_name": "User",
+      "last_name": "Five",
+      "email": "user5@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 2
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 6,
+    "fields": {
+      "username": "user6",
+      "password": "pbkdf2_sha256$260000$fakehash6",
+      "first_name": "User",
+      "last_name": "Six",
+      "email": "user6@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 3
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 7,
+    "fields": {
+      "username": "user7",
+      "password": "pbkdf2_sha256$260000$fakehash7",
+      "first_name": "User",
+      "last_name": "Seven",
+      "email": "user7@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 1
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 8,
+    "fields": {
+      "username": "user8",
+      "password": "pbkdf2_sha256$260000$fakehash8",
+      "first_name": "User",
+      "last_name": "Eight",
+      "email": "user8@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 2
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 9,
+    "fields": {
+      "username": "user9",
+      "password": "pbkdf2_sha256$260000$fakehash9",
+      "first_name": "User",
+      "last_name": "Nine",
+      "email": "user9@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 3
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 10,
+    "fields": {
+      "username": "user10",
+      "password": "pbkdf2_sha256$260000$fakehash10",
+      "first_name": "User",
+      "last_name": "Ten",
+      "email": "user10@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "position": 1
+    }
+  },
+
+
+  {
+    "model": "task.team",
+    "pk": 1,
+    "fields": { "name": "Alpha", "workers": [1, 2, 3] }
+  },
+  {
+    "model": "task.team",
+    "pk": 2,
+    "fields": { "name": "Beta", "workers": [4, 5, 6] }
+  },
+  {
+    "model": "task.team",
+    "pk": 3,
+    "fields": { "name": "Gamma", "workers": [7, 8, 9, 10] }
+  },
+
+
+  {
+    "model": "task.tasktype",
+    "pk": 1,
+    "fields": { "name": "Bug" }
+  },
+  {
+    "model": "task.tasktype",
+    "pk": 2,
+    "fields": { "name": "Feature" }
+  },
+  {
+    "model": "task.tasktype",
+    "pk": 3,
+    "fields": { "name": "Refactor" }
+  },
+
+
+  {
+    "model": "task.task",
+    "pk": 1,
+    "fields": {
+      "priority": "High",
+      "name": "Fix API auth",
+      "description": "Fix authentication issue in REST API",
+      "deadline": "2025-12-01T18:00:00Z",
+      "is_completed": false,
+      "task_type": 1,
+      "created_by": 1,
+      "assignees": [1, 2]
+    }
+  },
+  {
+    "model": "task.task",
+    "pk": 2,
+    "fields": {
+      "priority": "Medium",
+      "name": "Add notifications",
+      "description": "Implement notification system",
+      "deadline": "2025-11-15T15:00:00Z",
+      "is_completed": false,
+      "task_type": 2,
+      "created_by": 4,
+      "assignees": [4, 5]
+    }
+  },
+  {
+    "model": "task.task",
+    "pk": 3,
+    "fields": {
+      "priority": "Low",
+      "name": "Code cleanup",
+      "description": "Remove unused code and comments",
+      "deadline": "2025-10-01T09:00:00Z",
+      "is_completed": false,
+      "task_type": 3,
+      "created_by": 7,
+      "assignees": [7, 8, 9]
+    }
+  },
+
+
+  {
+    "model": "task.tag",
+    "pk": 1,
+    "fields": { "name": "backend", "tasks": [1] }
+  },
+  {
+    "model": "task.tag",
+    "pk": 2,
+    "fields": { "name": "notification", "tasks": [2] }
+  },
+  {
+    "model": "task.tag",
+    "pk": 3,
+    "fields": { "name": "refactor", "tasks": [3] }
+  },
+
+
+  {
+    "model": "task.project",
+    "pk": 1,
+    "fields": {
+      "name": "Backend Revamp",
+      "description": "Improve backend structure",
+      "team": [1],
+      "tasks": [1]
+    }
+  },
+  {
+    "model": "task.project",
+    "pk": 2,
+    "fields": {
+      "name": "User Features",
+      "description": "Add user-facing features",
+      "team": [2],
+      "tasks": [2]
+    }
+  },
+  {
+    "model": "task.project",
+    "pk": 3,
+    "fields": {
+      "name": "Maintenance",
+      "description": "Refactoring and optimization",
+      "team": [3],
+      "tasks": [3]
+    }
+  }
+]

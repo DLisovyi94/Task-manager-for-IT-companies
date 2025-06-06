@@ -10,8 +10,8 @@
         <div class="col">
             <h5>Positions</h5>
             <ul>
-                {% for p in position %}
-                    <li>{{ p.name }}</li>
+                {% for position in position_list %}
+                    <li>{{ position.name }}</li>
                 {% empty %}
                     <li>No positions available.</li>
                 {% endfor %}
@@ -21,24 +21,24 @@
         <div class="col">
             <h5>Workers</h5>
             <ul>
-                {% for w in worker %}
-                    <li>{{ w.first_name }} {{ w.last_name }}</li>
+                {% for worker in worker_list %}
+                    <li>{{ worker.first_name }} {{ worker.last_name }}</li>
                 {% empty %}
                     <li>No workers available.</li>
                 {% endfor %}
             </ul>
         </div>
 
-        <div class="col">
-            <h5>Task Types</h5>
-            <ul>
-                {% for tt in tasktypes %}
-                    <li>{{ tt.name }}</li>
-                {% empty %}
-                    <li>No task types.</li>
-                {% endfor %}
-            </ul>
-        </div>
+{#        <div class="col">#}
+{#            <h5>task Types</h5>#}
+{#            <ul>#}
+{#                {% for tt in tasktypes %}#}
+{#                    <li>{{ tt.name }}</li>#}
+{#                {% empty %}#}
+{#                    <li>No task types.</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
 
         <div class="col">
             <h5>Tasks</h5>
