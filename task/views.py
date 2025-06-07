@@ -62,4 +62,11 @@ class TeamListView(LoginRequiredMixin,ListView):
     paginate_by = 5
 
 
+class ProjectListView(LoginRequiredMixin,ListView):
+    model = Project
+    context_object_name = "project_list"
+    template_name = "task/project_list.html"
+    paginate_by = 5
+
+
 # Create your views here.

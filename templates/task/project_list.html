@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>
+    Project list
+    <a href="#" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+
+  <form method="get" action="">
+      {{ search_form|crispy }}
+      <input class="btn btn-secondary" type="submit" value="Submit">
+  </form>
+
+  {% if project_list %}
+    <ul>
+      {% for project in project_list %}
+        <li>
+        <br>
+          <h3>{{ project.name }}</h3>
+          <p><strong>Description:</strong> {{ project.description }}</p>
+
+          <p>
+            <strong>Team members:</strong>
+            {% for team in project.team.all %}
+              {{ team.name }}:
+              {% for worker in team.workers.all %}
+                {{ worker.first_name }} {{ worker.last_name }}{% if not forloop.last %}, {% endif %}
+              {% empty %}
+                No workers in team
+              {% endfor %}
+              <br>
+            {% empty %}
+              No teams assigned
+            {% endfor %}
+
+          <p><strong>Tasks:</strong></p>
+          <ul>
+            {% for task in project.tasks.all %}
+              <li>
+                <strong>{{ task.name }}</strong> —
+                Priority: {{ task.priority }},
+                Deadline: {{ task.deadline|date:"Y-m-d H:i" }},
+                Assigned to:
+                {% for worker in task.assignees.all %}
+                  {{ worker.first_name }} {{ worker.last_name }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                  No assignees
+                {% endfor %}
+              </li>
+            {% empty %}
+              <li>No tasks</li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no projects</p>
+  {% endif %}
+{% endblock %}
