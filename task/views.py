@@ -39,7 +39,7 @@ class PositionListView(LoginRequiredMixin,ListView):
     model = Position
     context_object_name = "position_list"
     template_name = "task/position_list.html"
-    paginate_by = 5
+    paginate_by = 2
 
 class WorkerListView(LoginRequiredMixin,ListView):
     model = Worker
@@ -52,6 +52,13 @@ class TaskListView(LoginRequiredMixin,ListView):
     model = Task
     context_object_name = "task_list"
     template_name = "task/task_list.html"
+    paginate_by = 5
+
+
+class TeamListView(LoginRequiredMixin,ListView):
+    model = Team
+    context_object_name = "team_list"
+    template_name = "task/team_list.html"
     paginate_by = 5
 
 
