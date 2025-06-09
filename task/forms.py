@@ -1,17 +1,11 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.core.exceptions import ValidationError
-
 from task.models import Worker, Position
 
 
 class WorkerForm(forms.ModelForm):
-    position = forms.ModelMultipleChoiceField(
-        queryset=get_user_model().objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-    )
-
     class Meta:
         model = Worker
         fields = "__all__"
@@ -22,17 +16,12 @@ class WorkerCreationForm(UserCreationForm):
         model = Worker
         fields = ("username", "first_name", "last_name", "position")
 
-    def clean_position(self):
-        return validate_position(self.cleaned_data["position"])
-
 
 class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = Worker
-        fields = ["position"]
+        fields = ["first_name", "last_name","position"]
 
-    def clean_position(self):
-        return validate_position(self.cleaned_data["position"])
 
 
 # def validate_license_number(

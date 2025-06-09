@@ -12,6 +12,14 @@
     {% empty %}
       No teams
     {% endfor %}
+  <br>
+    <a href="{% url 'task:worker-delete' pk=worker.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'task:worker-update' pk=worker.id %}" class="btn btn-secondary link-to-page">
+      Update Worker
+    </a>
   </p>
 
   <hr>
