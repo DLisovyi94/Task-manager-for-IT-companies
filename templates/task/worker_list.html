@@ -2,62 +2,29 @@
 
 {% block content %}
   <h1>
-    Username: {{ worker.username }}
-    <a href="#" class="btn btn-danger link-to-page">Delete</a>
-    <a href="#" class="btn btn-secondary link-to-page">Update status</a>
+    Worker List
+    <a href="{% url 'task:worker-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
   </h1>
 
-  <p><strong>First name:</strong> {{ worker.first_name }}</p>
-  <p><strong>Last name:</strong> {{ worker.last_name }}</p>
-  <p><strong>Position:</strong> {{ worker.position }}</p>
-
-  <h4>Created Tasks</h4>
-  <ul>
-    {% for task in worker.created_tasks.all %}
-      <li>{{ task.name }}</li>
-    {% empty %}
-      <li>No created tasks.</li>
-    {% endfor %}
-  </ul>
-
-  <h4>Assigned Tasks</h4>
-  <ul>
-    {% for task in worker.assigned_tasks.all %}
-      <li>{{ task.name }}</li>
-    {% empty %}
-      <li>No assigned tasks.</li>
-    {% endfor %}
-  </ul>
-
-  <h4>Teams</h4>
-  <ul>
-    {% for team in worker.teams.all %}
-      <li>{{ team.name }}</li>
-    {% empty %}
-      <li>No teams assigned.</li>
-    {% endfor %}
-  </ul>
-
-  <div class="ml-3">
-    <h4>Projects</h4>
+  {% if worker_list %}
     <ul>
-      {% for project in projects %}
+      {% for worker in worker_list %}
         <li>
-          <strong>{{ project.name }}</strong><br>
-          <strong>Description:</strong> {{ project.description }}<br>
-          <strong>Team:</strong> {{ project.team.first.name }}<br>
-          <strong>Tasks:</strong>
-          <ul>
-            {% for task in project.tasks.all %}
-              <li>{{ task.name }} ({{ task.task_type.name }})</li>
-            {% endfor %}
-          </ul>
+          <strong>{{ worker.username }}</strong> —
+          {{ worker.first_name }} {{ worker.last_name }},
+          Position: {{ worker.position }}
+          Teams:
+          {% for team in worker.teams.all %}
+            {{ team.name }}{% if not forloop.last %}, {% endif %}
+          {% empty %}
+            No teams
+          {% endfor %}
         </li>
-      {% empty %}
-        <li>No projects!</li>
       {% endfor %}
     </ul>
-  </div>
-
-  <p class="text-muted"><strong>User ID:</strong> {{ worker.id }}</p>
+  {% else %}
+    <p>No workers found.</p>
+  {% endif %}
 {% endblock %}

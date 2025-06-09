@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
+from task.forms import WorkerCreationForm
 from task.models import Position, Worker, TaskType, Task, Tag, Team, Project
 
 
@@ -41,12 +43,18 @@ class PositionListView(LoginRequiredMixin,ListView):
     template_name = "task/position_list.html"
     paginate_by = 2
 
-class WorkerListView(LoginRequiredMixin,ListView):
+class WorkerListView(LoginRequiredMixin, ListView):
     model = Worker
     context_object_name = "worker_list"
     template_name = "task/worker_list.html"
     paginate_by = 5
 
+
+class WorkerCreateView(LoginRequiredMixin, CreateView):
+    model = Worker
+    form_class = WorkerCreationForm
+    template_name = "task/worker_form.html"
+    success_url = reverse_lazy("task:worker_list")
 
 class TaskListView(LoginRequiredMixin,ListView):
     model = Task
