@@ -13,6 +13,7 @@
           {{ task.name }}
           <span>
             <a href="{% url 'task:task-update' pk=task.id %}" class="btn btn-sm btn-outline-secondary">Update</a>
+            <a href="{% url 'task:task-delete' pk=task.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
           </span>
         </h4>
 
