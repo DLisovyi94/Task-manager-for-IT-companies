@@ -42,14 +42,13 @@ class TaskAdmin(admin.ModelAdmin):
         "created_by__username",
         "assignees__username",
     )
-    filter_horizontal = ("assignees",)
+    filter_horizontal = ("assignees", "tags")
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
-    filter_horizontal = ("tasks",)
 
 
 @admin.register(Team)

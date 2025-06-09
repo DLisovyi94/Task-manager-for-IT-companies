@@ -37,6 +37,14 @@
           {% empty %} <span class="text-muted">None</span>
           {% endfor %}
         </p>
+
+        <p><strong>Tags:</strong>
+          {% for tag in task.tags.all %}
+            <span class="badge badge-info">{{ tag.name }}</span>
+          {% empty %}
+            <span class="text-muted">No tags</span>
+          {% endfor %}
+        </p>
       </div>
     </div>
   {% empty %}

@@ -90,19 +90,20 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("task:task_list")
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user  # <-- обов'язково
+        form.instance.created_by = self.request.user
         return super().form_valid(form)
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TaskUpdateForm
-    success_url = reverse_lazy("task:worker_list")
+    template_name = "task/task_form.html"
+    success_url = reverse_lazy("task:task_list")
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
-    model = Worker
-    success_url = reverse_lazy("task:worker_list")
+    model = Task
+    success_url = reverse_lazy("task:task_list")
 
 
 class TeamListView(LoginRequiredMixin, ListView):

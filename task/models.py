@@ -45,6 +45,7 @@ class Task(models.Model):
     task_type = models.ForeignKey(
         "TaskType", on_delete=models.PROTECT, related_name="tasks"
     )
+    tags = models.ManyToManyField("Tag", related_name="tasks", blank=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="created_tasks"
     )
@@ -64,7 +65,6 @@ class Task(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    tasks = models.ManyToManyField("Task", related_name="tags", blank=True)
 
     def __str__(self):
         return self.name
