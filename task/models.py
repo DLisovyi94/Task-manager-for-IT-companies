@@ -18,7 +18,7 @@ class Worker(AbstractUser):
     )
 
     def __str__(self):
-        return f"{self.username} ({self.position})" if self.position else self.username
+        return f"({self.first_name} {self.last_name} - {self.position} )" if self.position else self.username
 
 
 class TaskType(models.Model):

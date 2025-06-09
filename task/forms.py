@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from task.models import Worker, Position, Task
+from task.models import Worker, Position, Task, Team
 
 
 class WorkerForm(forms.ModelForm):
@@ -42,6 +42,12 @@ class TaskUpdateForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ["assignees", "is_completed", "tags"]
+
+
+class TeamCreationForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = "__all__"
 
 
 # def validate_license_number(

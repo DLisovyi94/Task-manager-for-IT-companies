@@ -4,14 +4,14 @@
 {% block content %}
   <h1>
     Teams list
-    <a href="#" class="btn btn-primary link-to-page">
+    <a href="{% url 'task:team-create' %}" class="btn btn-primary link-to-page">
       Create
     </a>
   </h1>
-  <form method="get" action="">
-      {{ search_form|crispy }}
-      <input class="btn btn-secondary" type="submit" value="Submit">
-  </form>
+{#  <form method="get" action="">#}
+{#      {{ search_form|crispy }}#}
+{#      <input class="btn btn-secondary" type="submit" value="Submit">#}
+{#  </form>#}
   {% if team_list %}
     <ul>
   {% for team in team_list %}

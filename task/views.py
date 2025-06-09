@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView, CreateView, DetailView
 
-from task.forms import WorkerCreationForm, WorkerUpdateForm, TaskCreationForm, TaskUpdateForm
+from task.forms import WorkerCreationForm, WorkerUpdateForm, TaskCreationForm, TaskUpdateForm, TeamCreationForm
 from task.models import Position, Worker, TaskType, Task, Tag, Team, Project
 
 
@@ -118,6 +118,27 @@ class TeamDetailView(LoginRequiredMixin, DetailView):
     model = Team
     context_object_name = "team"
     template_name = 'task/team_detail.html'
+
+
+class TeamCreateView(LoginRequiredMixin, CreateView):
+    model = Team
+    form_class = TeamCreationForm
+    template_name = "task/team_form.html"
+    success_url = reverse_lazy("task:team_list")
+
+
+
+
+# class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
+#     model = Task
+#     form_class = TaskUpdateForm
+#     template_name = "task/task_form.html"
+#     success_url = reverse_lazy("task:task_list")
+#
+#
+# class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
+#     model = Task
+#     success_url = reverse_lazy("task:task_list")
 
 
 class ProjectListView(LoginRequiredMixin, ListView):
