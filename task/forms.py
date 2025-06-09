@@ -48,6 +48,12 @@ class TaskCreationForm(forms.ModelForm):
         ]
 
 
+class TaskUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ["assignees", "is_completed"]
+
+
 # def validate_license_number(
 #     license_number,
 # ):  # regex validation is also possible here

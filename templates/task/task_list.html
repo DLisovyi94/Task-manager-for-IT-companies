@@ -11,6 +11,9 @@
       <div class="card-body">
         <h4 class="card-title d-flex justify-content-between">
           {{ task.name }}
+          <span>
+            <a href="{% url 'task:task-update' pk=task.id %}" class="btn btn-sm btn-outline-secondary">Update</a>
+          </span>
         </h4>
 
         <p><strong>Description:</strong> {{ task.description }}</p>
