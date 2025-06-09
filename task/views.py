@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView, CreateView, DetailView
 
-from task.forms import WorkerCreationForm, WorkerUpdateForm
+from task.forms import WorkerCreationForm, WorkerUpdateForm, TaskCreationForm
 from task.models import Position, Worker, TaskType, Task, Tag, Team, Project
 
 
@@ -35,14 +35,15 @@ def index(request):
         "num_visits": num_visits + 1,
     }
 
-    return render(request, 'task/index.html', context=context)
+    return render(request, "task/index.html", context=context)
 
 
-class PositionListView(LoginRequiredMixin,ListView):
+class PositionListView(LoginRequiredMixin, ListView):
     model = Position
     context_object_name = "position_list"
     template_name = "task/position_list.html"
     paginate_by = 2
+
 
 class WorkerListView(LoginRequiredMixin, ListView):
     model = Worker
@@ -74,21 +75,44 @@ class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Worker
     success_url = reverse_lazy("task:worker_list")
 
-class TaskListView(LoginRequiredMixin,ListView):
+
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = "task_list"
     template_name = "task/task_list.html"
     paginate_by = 5
 
 
-class TeamListView(LoginRequiredMixin,ListView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
+    model = Task
+    form_class = TaskCreationForm
+    template_name = "task/task_form.html"
+    success_url = reverse_lazy("task:task_list")
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user  # <-- обов'язково
+        return super().form_valid(form)
+
+
+# class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
+#     model = Worker
+#     form_class = WorkerUpdateForm
+#     success_url = reverse_lazy("task:worker_list")
+#
+#
+# class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
+#     model = Worker
+#     success_url = reverse_lazy("task:worker_list")
+
+
+class TeamListView(LoginRequiredMixin, ListView):
     model = Team
     context_object_name = "team_list"
     template_name = "task/team_list.html"
     paginate_by = 5
 
 
-class ProjectListView(LoginRequiredMixin,ListView):
+class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
     context_object_name = "project_list"
     template_name = "task/project_list.html"

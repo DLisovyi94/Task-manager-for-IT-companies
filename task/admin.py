@@ -1,21 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import (
-    Worker,
-    Position,
-    TaskType,
-    Task, Tag,
-    Team,
-    Project
-)
+from .models import Worker, Position, TaskType, Task, Tag, Team, Project
 
 
 @admin.register(Worker)
 class WorkerAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("position",)
-    fieldsets = UserAdmin.fieldsets + (
-        ("Additional Info", {"fields": ("position",)}),
-    )
+    fieldsets = UserAdmin.fieldsets + (("Additional Info", {"fields": ("position",)}),)
     add_fieldsets = UserAdmin.add_fieldsets + (
         ("Additional Info", {"fields": ("position",)}),
     )
@@ -36,9 +27,21 @@ class TaskTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ("name", "priority", "deadline", "is_completed", "task_type", "created_by")
+    list_display = (
+        "name",
+        "priority",
+        "deadline",
+        "is_completed",
+        "task_type",
+        "created_by",
+    )
     list_filter = ("priority", "is_completed", "task_type")
-    search_fields = ("name", "description", "created_by__username", "assignees__username")
+    search_fields = (
+        "name",
+        "description",
+        "created_by__username",
+        "assignees__username",
+    )
     filter_horizontal = ("assignees",)
 
 

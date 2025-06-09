@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from task.models import Worker, Position
+from task.models import Worker, Position, Task
 
 
 class WorkerForm(forms.ModelForm):
@@ -20,8 +20,32 @@ class WorkerCreationForm(UserCreationForm):
 class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = Worker
-        fields = ["first_name", "last_name","position"]
+        fields = ["first_name", "last_name", "position"]
 
+
+# class CarForm(forms.ModelForm):
+#     drivers = forms.ModelMultipleChoiceField(
+#         queryset=get_user_model().objects.all(),
+#         widget=forms.CheckboxSelectMultiple,
+#     )
+#
+#     class Meta:
+#         model = Car
+#         fields = "__all__"
+
+
+class TaskCreationForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "name",
+            "description",
+            "task_type",
+            "assignees",
+            "priority",
+            "deadline",
+            "is_completed",
+        ]
 
 
 # def validate_license_number(
