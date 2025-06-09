@@ -16,18 +16,12 @@
     <ul>
   {% for team in team_list %}
     <li>
-      <strong>{{ team.name }}</strong>
-      <ul>
-        {% for worker in team.workers.all %}
-          <li>{{ worker.first_name }} {{ worker.last_name }}</li>
-        {% empty %}
-          <li>No workers assigned</li>
-        {% endfor %}
-      </ul>
+      <a href="{% url 'task:team-detail' team.id %}">
+            ID: {{ team.id }}
+          </a>
+    <strong>{{ team.name }}</strong>
     </li>
   {% endfor %}
 </ul>
-  {% else %}
-    <p>There are no team with tasks</p>
   {% endif %}
 {% endblock %}

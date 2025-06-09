@@ -80,7 +80,7 @@ class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = "task_list"
     template_name = "task/task_list.html"
-    paginate_by = 5
+    paginate_by = 1
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
@@ -88,6 +88,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskCreationForm
     template_name = "task/task_form.html"
     success_url = reverse_lazy("task:task_list")
+
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -111,6 +112,12 @@ class TeamListView(LoginRequiredMixin, ListView):
     context_object_name = "team_list"
     template_name = "task/team_list.html"
     paginate_by = 5
+
+
+class TeamDetailView(LoginRequiredMixin, DetailView):
+    model = Team
+    context_object_name = "team"
+    template_name = 'task/team_detail.html'
 
 
 class ProjectListView(LoginRequiredMixin, ListView):
