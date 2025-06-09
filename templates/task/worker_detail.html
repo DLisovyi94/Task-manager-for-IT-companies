@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Worker Detail</h2>
+  <p><strong>Username:</strong> {{ worker.username }}</p>
+  <p><strong>First name:</strong> {{ worker.first_name }}</p>
+  <p><strong>Last name:</strong> {{ worker.last_name }}</p>
+  <p><strong>Position:</strong> {{ worker.position }}</p>
+  <p><strong>Teams:</strong>
+    {% for team in worker.teams.all %}
+      {{ team.name }}{% if not forloop.last %}, {% endif %}
+    {% empty %}
+      No teams
+    {% endfor %}
+  </p>
+
+  <hr>
+
+  <h3>Completed Tasks</h3>
+  <ul>
+    {% for task in worker.assigned_tasks.all %}
+      {% if task.is_completed %}
+        <li>
+          <strong>{{ task.name }}</strong> — {{ task.task_type.name }} —
+          Priority: {{ task.priority }},
+          Deadline: {{ task.deadline|date:"Y-m-d H:i" }}
+        </li>
+      {% endif %}
+    {% empty %}
+      <li>No tasks</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Incomplete Tasks</h3>
+  <ul>
+    {% for task in worker.assigned_tasks.all %}
+      {% if not task.is_completed %}
+        <li>
+          <strong>{{ task.name }}</strong> — {{ task.task_type.name }} —
+          Priority: {{ task.priority }},
+          Deadline: {{ task.deadline|date:"Y-m-d H:i" }}
+        </li>
+      {% endif %}
+    {% empty %}
+      <li>No tasks</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

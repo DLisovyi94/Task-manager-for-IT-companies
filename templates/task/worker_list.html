@@ -12,15 +12,12 @@
     <ul>
       {% for worker in worker_list %}
         <li>
+          <a href="{% url 'task:worker-detail' worker.id %}">
+            ID: {{ worker.id }}
+          </a> —
           <strong>{{ worker.username }}</strong> —
           {{ worker.first_name }} {{ worker.last_name }},
-          Position: {{ worker.position }}
-          Teams:
-          {% for team in worker.teams.all %}
-            {{ team.name }}{% if not forloop.last %}, {% endif %}
-          {% empty %}
-            No teams
-          {% endfor %}
+          Position: {{ worker.position }},
         </li>
       {% endfor %}
     </ul>
