@@ -13,7 +13,7 @@ from task.forms import (
     TeamCreationForm,
     TeamUpdateForm,
     ProjectCreationForm,
-    ProjectUpdateForm, WorkerSearchForm, TaskSearchForm
+    ProjectUpdateForm, WorkerSearchForm, TaskSearchForm, TeamSearchForm
 )
 from task.models import (
     Position,
@@ -163,6 +163,23 @@ class TeamListView(LoginRequiredMixin, ListView):
     context_object_name = "team_list"
     template_name = "task/team_list.html"
     paginate_by = 5
+
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TeamListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["name"] = name
+        context["search_form"] = TeamSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Team.objects.all()
+        form = TeamSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+        return queryset
 
 
 class TeamDetailView(LoginRequiredMixin, DetailView):
