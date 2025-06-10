@@ -22,7 +22,7 @@
           <h3>{{ project.name }}</h3>
           <span>
             <a href="{% url 'task:project-update' pk=project.id %}" class="btn btn-sm btn-outline-secondary">Update</a>
-{#            <a href="{% url 'task:task-delete' pk=task.id %}" class="btn btn-sm btn-outline-danger">Delete</a>#}
+            <a href="{% url 'task:project-delete' pk=project.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
           </span>
           <p><strong>Description:</strong> {{ project.description }}</p>
 

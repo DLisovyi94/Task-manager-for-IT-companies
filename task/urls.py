@@ -19,7 +19,7 @@ from .views import (
     TeamUpdateView,
     TeamDeleteView,
     ProjectCreateView,
-    ProjectUpdateView,
+    ProjectUpdateView, ProjectDeleteView,
 )
 
 urlpatterns = [
@@ -45,7 +45,7 @@ urlpatterns = [
     path("projects/", ProjectListView.as_view(), name="project_list"),
     path("projects/create/", ProjectCreateView.as_view(), name="project-create"),
     path("projects/<int:pk>/update/",  ProjectUpdateView.as_view(), name="project-update"),
-    # path("projects/<int:pk>/delete/",  ProjectDeleteView.as_view(), name="project-delete"),
+    path("projects/<int:pk>/delete/",  ProjectDeleteView.as_view(), name="project-delete"),
 ]
 
 app_name = "task"
