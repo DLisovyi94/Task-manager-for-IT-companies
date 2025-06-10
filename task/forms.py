@@ -62,10 +62,10 @@ class ProjectCreationForm(forms.ModelForm):
         fields = "__all__"
 
 
-# class TaskUpdateForm(forms.ModelForm):
-#     class Meta:
-#         model = Task
-#         fields = ["assignees", "is_completed", "tags"]
+class ProjectUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ["team", "tasks"]
 
 
 
