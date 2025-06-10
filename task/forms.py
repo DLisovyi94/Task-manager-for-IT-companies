@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from task.models import Worker, Position, Task, Team
+from task.models import Worker, Position, Task, Team, Project
 
 
 class WorkerForm(forms.ModelForm):
@@ -54,6 +54,18 @@ class TeamUpdateForm(forms.ModelForm):
     class Meta:
         model = Team
         fields = "__all__"
+
+
+class ProjectCreationForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = "__all__"
+
+
+# class TaskUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Task
+#         fields = ["assignees", "is_completed", "tags"]
 
 
 

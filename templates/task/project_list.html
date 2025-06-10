@@ -4,15 +4,15 @@
 {% block content %}
   <h1>
     Project list
-    <a href="#" class="btn btn-primary link-to-page">
+    <a href="{% url 'task:project-create' %}" class="btn btn-primary link-to-page">
       Create
     </a>
   </h1>
 
-  <form method="get" action="">
-      {{ search_form|crispy }}
-      <input class="btn btn-secondary" type="submit" value="Submit">
-  </form>
+{#  <form method="get" action="">#}
+{#      {{ search_form|crispy }}#}
+{#      <input class="btn btn-secondary" type="submit" value="Submit">#}
+{#  </form>#}
 
   {% if project_list %}
     <ul>

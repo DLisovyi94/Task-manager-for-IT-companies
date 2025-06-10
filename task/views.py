@@ -6,7 +6,7 @@ from django.views import generic
 from django.views.generic import ListView, CreateView, DetailView
 
 from task.forms import WorkerCreationForm, WorkerUpdateForm, TaskCreationForm, TaskUpdateForm, TeamCreationForm, \
-    TeamUpdateForm
+    TeamUpdateForm, ProjectCreationForm
 from task.models import Position, Worker, TaskType, Task, Tag, Team, Project
 
 
@@ -140,6 +140,23 @@ class TeamDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("task:team_list")
 
 
+class ProjectListView(LoginRequiredMixin, ListView):
+    model = Project
+    context_object_name = "project_list"
+    template_name = "task/project_list.html"
+    paginate_by = 1
+
+
+class ProjectCreateView(LoginRequiredMixin, CreateView):
+    model = Project
+    form_class = ProjectCreationForm
+    template_name = "task/project_form.html"
+    success_url = reverse_lazy("task:project_list")
+
+
+    # def form_valid(self, form):
+    #     form.instance.created_by = self.request.user
+    #     return super().form_valid(form)
 
 
 # class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -153,12 +170,6 @@ class TeamDeleteView(LoginRequiredMixin, generic.DeleteView):
 #     model = Task
 #     success_url = reverse_lazy("task:task_list")
 
-
-class ProjectListView(LoginRequiredMixin, ListView):
-    model = Project
-    context_object_name = "project_list"
-    template_name = "task/project_list.html"
-    paginate_by = 5
 
 
 # Create your views here.
