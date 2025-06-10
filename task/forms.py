@@ -92,7 +92,27 @@ class WorkerSearchForm(forms.Form):
         widget=forms.TextInput(
             attrs={"placeholder": "search by Position"})
     )
-#
+
+
+class TaskSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "search by Task name"})
+    )
+
+
+class TeamSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "search by Team name"})
+    )
+
 #
 # class CarSearchForm(forms.Form):
 #     model = forms.CharField(

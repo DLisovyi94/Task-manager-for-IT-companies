@@ -1,8 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Tasks</h1>
+    <form method="get" action="">
+      {{ search_form|crispy }}
+      <input class="btn btn-secondary" type="submit" value="Submit">
+    </form>
     <a href="{% url 'task:task-create' %}" class="btn btn-success">Create Task</a>
   </div>
 
