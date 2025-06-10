@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
+
 from task.models import Worker, Position, Task, Team, Project
 
 
@@ -17,10 +19,28 @@ class WorkerCreationForm(UserCreationForm):
         fields = ("username", "first_name", "last_name", "position")
 
 
+    def clean_position(self):
+         return validate_position(self.cleaned_data["position"])
+
+
 class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = Worker
         fields = ["first_name", "last_name", "position"]
+
+
+    def clean_position(self):
+         return validate_position(self.cleaned_data["position"])
+
+
+def validate_position(position):
+    if not isinstance(position, str):
+        raise ValidationError("Position must be a string.")
+
+    if not position.isalpha():
+        raise ValidationError("Position should contain only letters and no digits or symbols.")
+
+    return position
 
 
 class TaskCreationForm(forms.ModelForm):
