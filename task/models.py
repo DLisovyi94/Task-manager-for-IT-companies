@@ -21,6 +21,10 @@ class Worker(AbstractUser):
         return f"({self.first_name} {self.last_name} - {self.position} )" if self.position else self.username
 
 
+    def get_absolute_url(self):
+        return reverse("task:worker-detail", kwargs={"pk": self.pk})
+
+
 class TaskType(models.Model):
     name = models.CharField(max_length=255)
 
