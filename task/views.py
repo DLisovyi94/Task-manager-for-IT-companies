@@ -135,6 +135,11 @@ class TeamUpdateView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy("task:team_list")
 
 
+class TeamDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Team
+    success_url = reverse_lazy("task:team_list")
+
+
 
 
 # class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):

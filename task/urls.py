@@ -17,6 +17,7 @@ from .views import (
     TeamDetailView,
     TeamCreateView,
     TeamUpdateView,
+    TeamDeleteView,
 )
 
 urlpatterns = [
@@ -38,7 +39,7 @@ urlpatterns = [
     path("teams/<int:pk>/", TeamDetailView.as_view(), name="team-detail"),
     path("teams/create/", TeamCreateView.as_view(), name="team-create"),
     path("teams/<int:pk>/update/", TeamUpdateView.as_view(), name="team-update"),
-    # path("teams/<int:pk>/delete/", TeamDeleteView.as_view(), name="team-delete"),
+    path("teams/<int:pk>/delete/", TeamDeleteView.as_view(), name="team-delete"),
     path("projects/", ProjectListView.as_view(), name="project_list"),
 ]
 
