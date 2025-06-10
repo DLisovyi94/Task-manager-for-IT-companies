@@ -113,22 +113,12 @@ class TeamSearchForm(forms.Form):
             attrs={"placeholder": "search by Team name"})
     )
 
-#
-# class CarSearchForm(forms.Form):
-#     model = forms.CharField(
-#         max_length=255,
-#         required=False,
-#         label="",
-#         widget=forms.TextInput(
-#             attrs={"placeholder": "search by Model"})
-#     )
-#
-#
-# class ManufacturerSearchForm(forms.Form):
-#     name = forms.CharField(
-#         max_length=255,
-#         required=False,
-#         label="",
-#         widget=forms.TextInput(
-#             attrs={"placeholder": "search by Name"})
-#     )
+
+class ProjectSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "search by Project name"})
+    )
