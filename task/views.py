@@ -42,8 +42,8 @@ def index(request):
     request.session["num_visits"] = num_visits + 1
 
     context = {
-        "position": position,
-        "worker": worker,
+        "position_list": position,
+        "worker_list": worker,
         "tasktypes": tasktypes,
         "task": task,
         "tags": tags,
