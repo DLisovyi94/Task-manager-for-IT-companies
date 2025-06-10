@@ -50,6 +50,15 @@ class TeamCreationForm(forms.ModelForm):
         fields = "__all__"
 
 
+class TeamUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = "__all__"
+
+
+
+
+
 # def validate_license_number(
 #     license_number,
 # ):  # regex validation is also possible here
