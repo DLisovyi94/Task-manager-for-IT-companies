@@ -84,14 +84,14 @@ class ProjectUpdateForm(forms.ModelForm):
 #     return license_number
 #
 #
-# class DriverSearchForm(forms.Form):
-#     username = forms.CharField(
-#         max_length=255,
-#         required=False,
-#         label="",
-#         widget=forms.TextInput(
-#             attrs={"placeholder": "search by Username"})
-#     )
+class WorkerSearchForm(forms.Form):
+    position = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "search by Position"})
+    )
 #
 #
 # class CarSearchForm(forms.Form):
