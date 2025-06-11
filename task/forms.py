@@ -1,10 +1,9 @@
-from django import forms
-from django.contrib.auth import get_user_model
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from task.models import Worker, Position, Task, Team, Project
+from task.models import Worker, Task, Team, Project
 
 
 class WorkerForm(forms.ModelForm):
@@ -18,9 +17,8 @@ class WorkerCreationForm(UserCreationForm):
         model = Worker
         fields = ("username", "first_name", "last_name", "position")
 
-
     def clean_position(self):
-         return validate_position(self.cleaned_data["position"])
+        return validate_position(self.cleaned_data["position"])
 
 
 class WorkerUpdateForm(forms.ModelForm):
@@ -28,14 +26,15 @@ class WorkerUpdateForm(forms.ModelForm):
         model = Worker
         fields = ["first_name", "last_name", "position"]
 
-
     def clean_position(self):
-         return validate_position(self.cleaned_data["position"])
+        return validate_position(self.cleaned_data["position"])
 
 
 def validate_position(position):
     if not position.name.isalpha():
-        raise ValidationError("Position should contain only letters and no digits or symbols.")
+        raise ValidationError(
+            "Position should contain only letters and "
+            "no digits or symbols.")
     return position
 
 
@@ -84,22 +83,6 @@ class ProjectUpdateForm(forms.ModelForm):
         fields = ["team", "tasks"]
 
 
-
-
-
-# def validate_license_number(
-#     license_number,
-# ):  # regex validation is also possible here
-#     if len(license_number) != 8:
-#         raise ValidationError("License number should consist of 8 characters")
-#     elif not license_number[:3].isupper() or not license_number[:3].isalpha():
-#         raise ValidationError("First 3 characters should be uppercase letters")
-#     elif not license_number[3:].isdigit():
-#         raise ValidationError("Last 5 characters should be digits")
-#
-#     return license_number
-#
-#
 class WorkerSearchForm(forms.Form):
     position = forms.CharField(
         max_length=255,

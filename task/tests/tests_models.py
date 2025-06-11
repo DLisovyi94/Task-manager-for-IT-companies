@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from task.models import Position, Worker, TaskType, Task, Tag, Team, Project
+from task.models import Position, TaskType, Task, Tag, Team, Project
 
 
 class ModelsTestCase(TestCase):
@@ -60,7 +60,9 @@ class ModelsTestCase(TestCase):
 
     def test_task_str(self):
         expected_str = (
-            f"{self.task.name}, {self.task_type.name}, priority: {self.task.priority}, "
+            f"{self.task.name}, "
+            f"{self.task_type.name}, "
+            f"priority: {self.task.priority}, "
             f"deadline: {self.task.deadline.strftime('%Y-%m-%d %H:%M')},"
             f"is_completed: {self.task.is_completed}"
         )

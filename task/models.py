@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
-from django.db.models import TextChoices
 
 
 class Position(models.Model):
@@ -18,11 +17,15 @@ class Worker(AbstractUser):
     )
 
     def __str__(self):
-        return f"({self.first_name} {self.last_name} - {self.position} )" if self.position else self.username
-
+        return (f"({self.first_name} "
+                f"{self.last_name} - {self.position} )") \
+            if self.position else self.username
 
     def get_absolute_url(self):
-        return reverse("task:worker-detail", kwargs={"pk": self.pk})
+        return reverse(
+            "task:worker-detail",
+            kwargs={"pk": self.pk}
+        )
 
 
 class TaskType(models.Model):
@@ -40,21 +43,33 @@ class Task(models.Model):
         LOW = "Low", "Low"
 
     priority = models.CharField(
-        max_length=20, choices=Priority.choices, default=Priority.MEDIUM
+        max_length=20,
+        choices=Priority.choices,
+        default=Priority.MEDIUM
     )
     name = models.CharField(max_length=255)
     description = models.TextField()
     deadline = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
     task_type = models.ForeignKey(
-        "TaskType", on_delete=models.PROTECT, related_name="tasks"
+        "TaskType",
+        on_delete=models.PROTECT,
+        related_name="tasks"
     )
-    tags = models.ManyToManyField("Tag", related_name="tasks", blank=True)
+    tags = models.ManyToManyField(
+        "Tag",
+        related_name="tasks",
+        blank=True
+    )
     created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="created_tasks"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="created_tasks"
     )
     assignees = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, blank=True, related_name="assigned_tasks"
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="assigned_tasks"
     )
 
     def __str__(self):
@@ -62,7 +77,8 @@ class Task(models.Model):
             f"{self.name}, "
             f"{self.task_type.name}, "
             f"priority: {self.priority}, "
-            f"deadline: {self.deadline.strftime('%Y-%m-%d %H:%M')},"
+            f"deadline: "
+            f"{self.deadline.strftime('%Y-%m-%d %H:%M')},"
             f"is_completed: {self.is_completed}"
         )
 
@@ -77,7 +93,9 @@ class Tag(models.Model):
 class Team(models.Model):
     name = models.CharField(max_length=255)
     workers = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, blank=True, related_name="teams"
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="teams"
     )
 
     def __str__(self):
@@ -87,11 +105,19 @@ class Team(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    team = models.ManyToManyField("Team", blank=True, related_name="projects")
-    tasks = models.ManyToManyField("Task", related_name="projects", blank=True)
+    team = models.ManyToManyField(
+        "Team",
+        blank=True,
+        related_name="projects"
+    )
+    tasks = models.ManyToManyField(
+        "Task",
+        related_name="projects",
+        blank=True
+    )
 
     def __str__(self):
-        return f"project: {self.name}, description: {self.description}"
-
+        return (f"project: {self.name}, "
+                f"description: {self.description}")
 
 # Create your models here.

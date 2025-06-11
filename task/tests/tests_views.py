@@ -2,7 +2,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from task.models import Position, Worker, TaskType, Task, Team, Project
+from task.models import Position, TaskType, Task, Team, Project
+
 
 class ViewTests(TestCase):
     def setUp(self):
@@ -26,13 +27,17 @@ class ViewTests(TestCase):
         self.team = Team.objects.create(name="Dev Team")
         self.team.workers.add(self.user)
 
-        self.project = Project.objects.create(name="My Project", description="Project desc")
+        self.project = Project.objects.create(
+            name="My Project",
+            description="Project desc")
         self.project.team.add(self.team)
         self.project.tasks.add(self.task)
 
     def test_login_required_redirect(self):
-        response = self.client.get(reverse("task:worker_list"))
-        self.assertRedirects(response, f"/accounts/login/?next={reverse('task:worker_list')}")
+        response = self.client.get(
+            reverse("task:worker_list"))
+        self.assertRedirects(
+            response, f"/accounts/login/?next={reverse('task:worker_list')}")
 
     def test_index_view_authenticated(self):
         self.client.login(username="testuser", password="testpass123")

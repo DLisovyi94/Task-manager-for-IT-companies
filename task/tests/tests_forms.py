@@ -5,7 +5,7 @@ from task.forms import (
     TeamCreationForm, ProjectCreationForm,
     WorkerSearchForm, TaskSearchForm, TeamSearchForm, ProjectSearchForm
 )
-from task.models import Worker, Position, TaskType, Tag, Team
+from task.models import Position, TaskType, Tag, Team
 from django.contrib.auth import get_user_model
 
 
@@ -55,7 +55,8 @@ class FormTests(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_team_creation_form(self):
-        form = TeamCreationForm(data={"name": "Dev Team", "workers": [self.worker.id]})
+        form = TeamCreationForm(
+            data={"name": "Dev Team", "workers": [self.worker.id]})
         self.assertTrue(form.is_valid())
 
     def test_project_creation_form(self):

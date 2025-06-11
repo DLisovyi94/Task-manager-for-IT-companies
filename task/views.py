@@ -72,7 +72,6 @@ class WorkerListView(LoginRequiredMixin, ListView):
     template_name = "task/worker_list.html"
     paginate_by = 5
 
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
         position = self.request.GET.get("position", "")
@@ -86,7 +85,9 @@ class WorkerListView(LoginRequiredMixin, ListView):
         queryset = Worker.objects.all()
         form = WorkerSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(position__name__icontains=form.cleaned_data["position"])
+            return queryset.filter(
+                position__name__icontains=form.cleaned_data["position"]
+            )
         return queryset
 
 
@@ -120,9 +121,9 @@ class TaskListView(LoginRequiredMixin, ListView):
     template_name = "task/task_list.html"
     paginate_by = 1
 
-
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(TaskListView, self).get_context_data(**kwargs)
+        context = super(
+            TaskListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
         context["name"] = name
         context["search_form"] = TaskSearchForm(
@@ -134,7 +135,8 @@ class TaskListView(LoginRequiredMixin, ListView):
         queryset = Task.objects.all()
         form = TaskSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(name__icontains=form.cleaned_data["name"])
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"])
         return queryset
 
 
@@ -143,7 +145,6 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskCreationForm
     template_name = "task/task_form.html"
     success_url = reverse_lazy("task:task_list")
-
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -168,7 +169,6 @@ class TeamListView(LoginRequiredMixin, ListView):
     template_name = "task/team_list.html"
     paginate_by = 5
 
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TeamListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
@@ -182,7 +182,8 @@ class TeamListView(LoginRequiredMixin, ListView):
         queryset = Team.objects.all()
         form = TeamSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(name__icontains=form.cleaned_data["name"])
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"])
         return queryset
 
 
@@ -217,7 +218,6 @@ class ProjectListView(LoginRequiredMixin, ListView):
     template_name = "task/project_list.html"
     paginate_by = 1
 
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProjectListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
@@ -231,7 +231,8 @@ class ProjectListView(LoginRequiredMixin, ListView):
         queryset = Project.objects.all()
         form = ProjectSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(name__icontains=form.cleaned_data["name"])
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"])
         return queryset
 
 
