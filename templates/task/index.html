@@ -9,65 +9,49 @@
     </div>
   </div>
 
-  <div class="d-flex flex-nowrap overflow-auto px-2">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
 
-    <div class="card shadow mx-2" style="min-width: 300px;">
-      <div class="card-body">
-        <h5 class="card-title">
-          <i class="material-icons text-success">people</i> Workers ({{ worker_list|length }})
-        </h5>
-        <ul class="list-group list-group-flush">
-          {% for worker in worker_list %}
-            <li class="list-group-item">{{ worker.first_name }} {{ worker.last_name }}</li>
-          {% empty %}
-            <li class="list-group-item text-muted">No workers available.</li>
-          {% endfor %}
-        </ul>
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-success mb-2" style="font-size: 36px;">people</i>
+          <h5 class="card-title">Workers</h5>
+          <p class="display-6">{{ worker_list|length }}</p>
+          <a href="{% url 'task:worker_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
       </div>
     </div>
 
-    <div class="card shadow mx-2" style="min-width: 300px;">
-      <div class="card-body">
-        <h5 class="card-title">
-          <i class="material-icons text-danger">assignment</i> Tasks ({{ task|length }})
-        </h5>
-        <ul class="list-group list-group-flush">
-          {% for t in task %}
-            <li class="list-group-item">{{ t.name }}</li>
-          {% empty %}
-            <li class="list-group-item text-muted">No tasks.</li>
-          {% endfor %}
-        </ul>
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-danger mb-2" style="font-size: 36px;">assignment</i>
+          <h5 class="card-title">Tasks</h5>
+          <p class="display-6">{{ task|length }}</p>
+          <a href="{% url 'task:task_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
       </div>
     </div>
 
-    <div class="card shadow mx-2" style="min-width: 300px;">
-      <div class="card-body">
-        <h5 class="card-title">
-          <i class="material-icons text-info">groups</i> Teams ({{ team|length }})
-        </h5>
-        <ul class="list-group list-group-flush">
-          {% for tm in team %}
-            <li class="list-group-item">{{ tm.name }}</li>
-          {% empty %}
-            <li class="list-group-item text-muted">No teams.</li>
-          {% endfor %}
-        </ul>
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-info mb-2" style="font-size: 36px;">groups</i>
+          <h5 class="card-title">Teams</h5>
+          <p class="display-6">{{ team|length }}</p>
+          <a href="{% url 'task:team_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
       </div>
     </div>
 
-    <div class="card shadow mx-2" style="min-width: 300px;">
-      <div class="card-body">
-        <h5 class="card-title">
-          <i class="material-icons text-dark">business_center</i> Projects ({{ projects|length }})
-        </h5>
-        <ul class="list-group list-group-flush">
-          {% for pr in projects %}
-            <li class="list-group-item">{{ pr.name }}</li>
-          {% empty %}
-            <li class="list-group-item text-muted">No projects.</li>
-          {% endfor %}
-        </ul>
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-dark mb-2" style="font-size: 36px;">business_center</i>
+          <h5 class="card-title">Projects</h5>
+          <p class="display-6">{{ projects|length }}</p>
+          <a href="{% url 'task:project_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
       </div>
     </div>
 

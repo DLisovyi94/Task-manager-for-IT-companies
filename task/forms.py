@@ -12,26 +12,13 @@ class WorkerForm(forms.ModelForm):
         fields = "__all__"
 
 
-# class TaskForm(forms.ModelForm):
-#     assignees = forms.ModelMultipleChoiceField(
-#         queryset=Worker.objects.all(),
-#         widget=forms.CheckboxSelectMultiple,
-#         required=False,
-#         label="Assignees"
-#     )
-#
-#     class Meta:
-#         model = Task
-#         fields = "__all__"
-
-
 class WorkerCreationForm(UserCreationForm):
     class Meta:
         model = Worker
         fields = ("username", "first_name", "last_name", "position")
 
-    def clean_position(self):
-        return validate_position(self.cleaned_data["position"])
+    # def clean_position(self):
+    #     return validate_position(self.cleaned_data["position"])
 
 
 class WorkerUpdateForm(forms.ModelForm):
@@ -39,16 +26,16 @@ class WorkerUpdateForm(forms.ModelForm):
         model = Worker
         fields = ["first_name", "last_name", "position"]
 
-    def clean_position(self):
-        return validate_position(self.cleaned_data["position"])
+    # def clean_position(self):
+    #     return validate_position(self.cleaned_data["position"])
 
 
-def validate_position(position):
-    if not position.name.isalpha():
-        raise ValidationError(
-            "Position should contain only letters and "
-            "no digits or symbols.")
-    return position
+# def validate_position(position):
+#     if not position.name.isalpha():
+#         raise ValidationError(
+#             "Position should contain only letters and "
+#             "no digits or symbols.")
+#     return position
 
 
 class TaskCreationForm(forms.ModelForm):
