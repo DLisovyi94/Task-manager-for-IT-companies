@@ -1,89 +1,82 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Home page</h1>
-    <p>Welcome to the best application for tasks ever!</p>
-    <h2>Dynamic content</h2>
-    <p>Company overview:</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center mb-4">
+      <h1 class="display-4">Welcome to Task Manager</h1>
+      <p class="lead text-muted">The best application for managing your IT tasks and team</p>
+    </div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <h5>Positions</h5>
-            <ul>
-                {% for position in position_list %}
-                    <li>{{ position.name }}</li>
-                {% empty %}
-                    <li>No positions available.</li>
-                {% endfor %}
-            </ul>
-        </div>
+  <div class="d-flex flex-nowrap overflow-auto px-2">
 
-        <div class="col">
-            <h5>Workers</h5>
-            <ul>
-                {% for worker in worker_list %}
-                    <li>{{ worker.first_name }} {{ worker.last_name }}</li>
-                {% empty %}
-                    <li>No workers available.</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-{#        <div class="col">#}
-{#            <h5>task Types</h5>#}
-{#            <ul>#}
-{#                {% for tt in tasktypes %}#}
-{#                    <li>{{ tt.name }}</li>#}
-{#                {% empty %}#}
-{#                    <li>No task types.</li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        </div>#}
-
-        <div class="col">
-            <h5>Tasks</h5>
-            <ul>
-                {% for t in task %}
-                    <li>{{ t.name }}</li>
-                {% empty %}
-                    <li>No tasks.</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="col">
-            <h5>Tags</h5>
-            <ul>
-                {% for tag in tags %}
-                    <li>{{ tag.name }}</li>
-                {% empty %}
-                    <li>No tags.</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="col">
-            <h5>Teams</h5>
-            <ul>
-                {% for tm in team %}
-                    <li>{{ tm.name }}</li>
-                {% empty %}
-                    <li>No teams.</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="col">
-            <h5>Projects</h5>
-            <ul>
-                {% for pr in projects %}
-                    <li>{{ pr.name }}</li>
-                {% empty %}
-                    <li>No projects.</li>
-                {% endfor %}
-            </ul>
-        </div>
+    <div class="card shadow mx-2" style="min-width: 300px;">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="material-icons text-success">people</i> Workers ({{ worker_list|length }})
+        </h5>
+        <ul class="list-group list-group-flush">
+          {% for worker in worker_list %}
+            <li class="list-group-item">{{ worker.first_name }} {{ worker.last_name }}</li>
+          {% empty %}
+            <li class="list-group-item text-muted">No workers available.</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
 
-    <p class="mt-4">You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+    <div class="card shadow mx-2" style="min-width: 300px;">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="material-icons text-danger">assignment</i> Tasks ({{ task|length }})
+        </h5>
+        <ul class="list-group list-group-flush">
+          {% for t in task %}
+            <li class="list-group-item">{{ t.name }}</li>
+          {% empty %}
+            <li class="list-group-item text-muted">No tasks.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="card shadow mx-2" style="min-width: 300px;">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="material-icons text-info">groups</i> Teams ({{ team|length }})
+        </h5>
+        <ul class="list-group list-group-flush">
+          {% for tm in team %}
+            <li class="list-group-item">{{ tm.name }}</li>
+          {% empty %}
+            <li class="list-group-item text-muted">No teams.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="card shadow mx-2" style="min-width: 300px;">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="material-icons text-dark">business_center</i> Projects ({{ projects|length }})
+        </h5>
+        <ul class="list-group list-group-flush">
+          {% for pr in projects %}
+            <li class="list-group-item">{{ pr.name }}</li>
+          {% empty %}
+            <li class="list-group-item text-muted">No projects.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-4">
+    <div class="col text-center">
+      <p class="text-muted">You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+    </div>
+  </div>
+</div>
 {% endblock %}
