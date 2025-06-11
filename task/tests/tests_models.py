@@ -33,7 +33,9 @@ class ModelsTestCase(TestCase):
         self.task.assignees.add(self.user2)
         self.team = Team.objects.create(name="Backend Team")
         self.team.workers.add(self.user1, self.user2)
-        self.project = Project.objects.create(name="Platform API", description="API development")
+        self.project = Project.objects.create(
+            name="Platform API", description="API development"
+        )
         self.project.team.add(self.team)
         self.project.tasks.add(self.task)
 
@@ -45,7 +47,10 @@ class ModelsTestCase(TestCase):
         self.assertEqual(str(self.user2), "user2")
 
     def test_worker_absolute_url(self):
-        self.assertEqual(self.user1.get_absolute_url(), f"/workers/{self.user1.pk}/")
+        self.assertEqual(
+            self.user1.get_absolute_url(),
+            f"/workers/{self.user1.pk}/"
+        )
 
     def test_task_type_str(self):
         self.assertEqual(str(self.task_type), "Bug")
@@ -56,7 +61,8 @@ class ModelsTestCase(TestCase):
     def test_task_str(self):
         expected_str = (
             f"{self.task.name}, {self.task_type.name}, priority: {self.task.priority}, "
-            f"deadline: {self.task.deadline.strftime('%Y-%m-%d %H:%M')},is_completed: {self.task.is_completed}"
+            f"deadline: {self.task.deadline.strftime('%Y-%m-%d %H:%M')},"
+            f"is_completed: {self.task.is_completed}"
         )
         self.assertEqual(str(self.task), expected_str)
 
@@ -64,5 +70,7 @@ class ModelsTestCase(TestCase):
         self.assertEqual(str(self.team), "Backend Team")
 
     def test_project_str(self):
-        self.assertEqual(str(self.project), "project: Platform API, description: API development")
-
+        self.assertEqual(
+            str(self.project),
+            "project: Platform API, description: API development"
+        )

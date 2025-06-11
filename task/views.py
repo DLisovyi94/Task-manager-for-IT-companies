@@ -13,7 +13,11 @@ from task.forms import (
     TeamCreationForm,
     TeamUpdateForm,
     ProjectCreationForm,
-    ProjectUpdateForm, WorkerSearchForm, TaskSearchForm, TeamSearchForm, ProjectSearchForm
+    ProjectUpdateForm,
+    WorkerSearchForm,
+    TaskSearchForm,
+    TeamSearchForm,
+    ProjectSearchForm
 )
 from task.models import (
     Position,
@@ -248,7 +252,3 @@ class ProjectUpdateView(LoginRequiredMixin, generic.UpdateView):
 class ProjectDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Project
     success_url = reverse_lazy("task:task_list")
-
-
-
-# Create your views here.
