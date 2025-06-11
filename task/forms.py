@@ -12,17 +12,17 @@ class WorkerForm(forms.ModelForm):
         fields = "__all__"
 
 
-class TaskForm(forms.ModelForm):
-    assignees = forms.ModelMultipleChoiceField(
-        queryset=Worker.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False,
-        label="Assignees"
-    )
-
-    class Meta:
-        model = Task
-        fields = "__all__"
+# class TaskForm(forms.ModelForm):
+#     assignees = forms.ModelMultipleChoiceField(
+#         queryset=Worker.objects.all(),
+#         widget=forms.CheckboxSelectMultiple,
+#         required=False,
+#         label="Assignees"
+#     )
+#
+#     class Meta:
+#         model = Task
+#         fields = "__all__"
 
 
 class WorkerCreationForm(UserCreationForm):
