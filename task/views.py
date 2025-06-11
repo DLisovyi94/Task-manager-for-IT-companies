@@ -167,7 +167,7 @@ class TeamListView(LoginRequiredMixin, ListView):
     model = Team
     context_object_name = "team_list"
     template_name = "task/team_list.html"
-    paginate_by = 5
+    paginate_by = 6
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TeamListView, self).get_context_data(**kwargs)

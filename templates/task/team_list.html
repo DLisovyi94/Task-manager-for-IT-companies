@@ -2,28 +2,51 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>
-    Teams list
-    <a href="{% url 'task:team-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-  <form method="get" action="">
-      {{ search_form|crispy }}
-      <input class="btn btn-secondary" type="submit" value="Submit">
-  </form>
-  <br>
+<div class="container mt-5">
+
+  <div class="row align-items-center mb-4">
+    <div class="col-md-6">
+      <h2 class="font-weight-bold mb-0">Teams</h2>
+    </div>
+    <div class="col-md-4">
+      <form method="get" action="" class="form-inline">
+        <div class="input-group w-100">
+          {{ search_form|crispy }}
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="submit">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2 text-md-right mt-3 mt-md-0">
+      <a href="{% url 'task:team-create' %}" class="btn btn-primary btn-block">
+        <i class="material-icons">group_add</i> Create
+      </a>
+    </div>
+  </div>
 
   {% if team_list %}
-    <ul>
-  {% for team in team_list %}
-    <li>
-      <a href="{% url 'task:team-detail' team.id %}">
-            ID: {{ team.id }}
-          </a>
-    <strong>{{ team.name }}</strong>
-    </li>
-  {% endfor %}
-</ul>
+    <div class="row">
+      {% for team in team_list %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+              <h5 class="card-title text-primary">
+                <a href="{% url 'task:team-detail' team.id %}" class="text-decoration-none">
+                  {{ team.name }}
+                </a>
+              </h5>
+              <p class="mb-0 text-muted">Team ID: {{ team.id }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center" role="alert">
+      <i class="material-icons">info</i> No teams found.
+    </div>
   {% endif %}
+
+</div>
 {% endblock %}
