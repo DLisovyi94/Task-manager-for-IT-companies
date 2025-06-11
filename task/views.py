@@ -82,12 +82,11 @@ class WorkerListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Worker.objects.all()
+        queryset = Worker.objects.select_related("position")
         form = WorkerSearchForm(self.request.GET)
         if form.is_valid():
             return queryset.filter(
-                position__name__icontains=form.cleaned_data["position"]
-            )
+                position__name__icontains=form.cleaned_data["position"])
         return queryset
 
 
@@ -132,11 +131,11 @@ class TaskListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Task.objects.all()
+        queryset = Task.objects.select_related(
+            "task_type").prefetch_related("assignees", "tags")
         form = TaskSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"])
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
         return queryset
 
 
@@ -228,11 +227,10 @@ class ProjectListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Project.objects.all()
+        queryset = Project.objects.prefetch_related("tasks")
         form = ProjectSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"])
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
         return queryset
 
 
