@@ -34,7 +34,7 @@ class WorkerUpdateForm(forms.ModelForm):
 
 
 def validate_position(position):
-    if not position.isalpha():
+    if not position.name.isalpha():
         raise ValidationError("Position should contain only letters and no digits or symbols.")
     return position
 
