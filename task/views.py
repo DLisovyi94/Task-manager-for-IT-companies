@@ -70,7 +70,7 @@ class WorkerListView(LoginRequiredMixin, ListView):
     model = Worker
     context_object_name = "worker_list"
     template_name = "task/worker_list.html"
-    paginate_by = 5
+    paginate_by = 6
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)

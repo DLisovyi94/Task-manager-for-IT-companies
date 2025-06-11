@@ -2,31 +2,51 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>
-    Worker List
-    <a href="{% url 'task:worker-create' %}" class="btn btn-primary link-to-page">
-      Create
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Workers</h1>
+    <a href="{% url 'task:worker-create' %}" class="btn btn-primary">
+      <i class="material-icons align-middle">person_add</i> Create
     </a>
-  </h1>
-  <form method="get" action="">
-      {{ search_form|crispy }}
-      <input class="btn btn-secondary" type="submit" value="Submit">
+  </div>
+
+  <form method="get" action="" class="mb-4">
+    <div class="input-group">
+      <input type="text"
+             name="position"
+             class="form-control"
+             placeholder="search by Position"
+             value="{{ request.GET.position }}">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-secondary">Search</button>
+      </div>
+    </div>
   </form>
 
   {% if worker_list %}
-    <ul>
+    <div class="row">
       {% for worker in worker_list %}
-        <li>
-          <a href="{% url 'task:worker-detail' worker.id %}">
-            ID: {{ worker.id }}
-          </a> —
-          <strong>{{ worker.username }}</strong> —
-          {{ worker.first_name }} {{ worker.last_name }},
-          Position: {{ worker.position }},
-        </li>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="{% url 'task:worker-detail' worker.id %}" class="text-decoration-none text-primary font-weight-bold">
+                  {{ worker.first_name }} {{ worker.last_name }}
+                </a>
+              </h5>
+              <p class="card-text mb-1"><strong>Username:</strong> {{ worker.username }}</p>
+              <p class="card-text mb-1"><strong>Position:</strong> {{ worker.position }}</p>
+              <p class="card-text text-muted small mb-0">ID: {{ worker.id }}</p>
+            </div>
+          </div>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
+
   {% else %}
-    <p>No workers found.</p>
+    <div class="alert alert-warning" role="alert">
+      No workers found.
+    </div>
   {% endif %}
+</div>
 {% endblock %}
