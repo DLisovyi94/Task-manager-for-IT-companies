@@ -9,9 +9,10 @@
       <div class="d-flex justify-content-between align-items-center">
         <h3 class="card-title text-primary mb-0">Team: {{ team.name }}</h3>
         <div class="d-flex gap-2">
-          <a href="{% url 'task:team-update' pk=team.id %}" class="btn btn-outline-secondary">
-            <i class="material-icons align-middle">edit</i> Update
+          <a href="{% url 'task:team-update' pk=team.id %}" class="btn btn-outline-primary mr-2">
+            <i class="material-icons">edit</i> Update
           </a>
+
           <a href="{% url 'task:team-delete' pk=team.id %}" class="btn btn-outline-danger">
             <i class="material-icons align-middle">delete</i> Delete
           </a>
