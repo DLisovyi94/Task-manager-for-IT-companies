@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -22,12 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-*n8rpc4g-*3*x1b2#fezk6766ckd15wx37^sdwn49$ngip^6^a")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
-
-ALLOWED_HOSTS = ["127.0.0.1"]
-
 
 # Application definition
 
@@ -75,18 +69,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "task_manager.wsgi.application"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
