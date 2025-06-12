@@ -17,8 +17,8 @@ class WorkerCreationForm(UserCreationForm):
         model = Worker
         fields = ("username", "first_name", "last_name", "position")
 
-    # def clean_position(self):
-    #     return validate_position(self.cleaned_data["position"])
+    def clean_position(self):
+        return validate_position(self.cleaned_data["position"])
 
 
 class WorkerUpdateForm(forms.ModelForm):
@@ -26,17 +26,16 @@ class WorkerUpdateForm(forms.ModelForm):
         model = Worker
         fields = ["first_name", "last_name", "position"]
 
-    # def clean_position(self):
-    #     return validate_position(self.cleaned_data["position"])
+    def clean_position(self):
+        return validate_position(self.cleaned_data["position"])
 
 
-# def validate_position(position):
-#     if not position.name.isalpha():
-#         raise ValidationError(
-#             "Position should contain only letters and "
-#             "no digits or symbols.")
-#     return position
-
+def validate_position(value):
+    if not all(char.isalpha() or char.isspace() for char in value):
+        raise ValidationError(
+            "Position should contain only letters and spaces. No digits or symbols allowed."
+        )
+    return value
 
 class TaskCreationForm(forms.ModelForm):
     class Meta:
