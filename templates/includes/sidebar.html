@@ -36,19 +36,29 @@
       </li>
     </ul>
 
-    <div class="d-flex align-items-center">
-      {% if user.is_authenticated %}
-        <div class="mr-3">
-          <strong>User:</strong>
-          <a href="{{ user.get_absolute_url }}">{{ user.get_username }}</a>
-        </div>
-        <form method="post" action="{% url 'logout' %}" class="mb-0">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
-        </form>
-      {% else %}
-        <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-sm btn-primary">Login</a>
-      {% endif %}
+    <div class="d-flex flex-column align-items-start gap-2 px-3 py-2">
+
+  {% if user.is_authenticated %}
+    <div class="d-flex align-items-center gap-2 text-dark">
+      <i class="material-icons text-primary">person</i>
+      <span><strong>{{ user.username }}</strong></span>
     </div>
+
+    <form method="post" action="{% url 'logout' %}" class="w-100">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-danger btn-sm w-100 d-flex align-items-center gap-2">
+        <i class="material-icons">logout</i> Logout
+      </button>
+    </form>
+
+  {% else %}
+    <a href="{% url 'login' %}?next={{ request.path }}"
+       class="btn btn-primary btn-sm w-100 d-flex align-items-center gap-2">
+      <i class="material-icons">login</i> Login
+    </a>
+  {% endif %}
+
+</div>
+
   </div>
 </div>

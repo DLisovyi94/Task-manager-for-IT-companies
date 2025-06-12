@@ -2,23 +2,42 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h3 class="card-title text-center text-primary mb-4">Login</h3>
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+          {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+              Your username and password didn't match. Please try again.
+            </div>
+          {% endif %}
 
-<h1>Login</h1>
+          {% if next %}
+            <div class="alert alert-info" role="alert">
+              Please login to see this page.
+            </div>
+          {% endif %}
 
-{% if next %}
-  <p>Please login to see this page.</p>
-{% endif %}
+          <form method="post" action="{% url 'login' %}" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
 
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="material-icons align-middle">login</i> Login
+              </button>
+            </div>
 
-  <input type="submit" value="Login" class="btn btn-primary" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+            {% if next %}
+              <input type="hidden" name="next" value="{{ next }}" />
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
