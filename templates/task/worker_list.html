@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Workers</h1>
+    <a href="{% url 'task:worker-create' %}" class="btn btn-success">
+      <i class="material-icons align-middle">person_add</i> Create
+    </a>
+  </div>
+
+  <form method="get" action="" class="mb-4">
+    <div class="input-group">
+      <input type="text"
+             name="position"
+             class="form-control"
+             placeholder="search by Position"
+             value="{{ request.GET.position }}">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-secondary">Search</button>
+      </div>
+    </div>
+  </form>
+
+  {% if worker_list %}
+    <div class="row">
+      {% for worker in worker_list %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="{% url 'task:worker-detail' worker.id %}" class="text-decoration-none text-primary font-weight-bold">
+                  {{ worker.first_name }} {{ worker.last_name }}
+                </a>
+              </h5>
+              <p class="card-text mb-1"><strong>Username:</strong> {{ worker.username }}</p>
+              <p class="card-text mb-1"><strong>Position:</strong> {{ worker.position }}</p>
+              <p class="card-text text-muted small mb-0">ID: {{ worker.id }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="alert alert-warning" role="alert">
+      No workers found.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

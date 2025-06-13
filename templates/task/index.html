@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center mb-4">
+      <h1 class="display-4">Welcome to Task Manager</h1>
+      <p class="lead text-muted">The best application for managing your IT tasks and team</p>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-success mb-2" style="font-size: 36px;">people</i>
+          <h5 class="card-title">Workers</h5>
+          <p class="display-6">{{ worker_list|length }}</p>
+          <a href="{% url 'task:worker_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-danger mb-2" style="font-size: 36px;">assignment</i>
+          <h5 class="card-title">Tasks</h5>
+          <p class="display-6">{{ task|length }}</p>
+          <a href="{% url 'task:task_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-info mb-2" style="font-size: 36px;">groups</i>
+          <h5 class="card-title">Teams</h5>
+          <p class="display-6">{{ team|length }}</p>
+          <a href="{% url 'task:team_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card text-center shadow h-100">
+        <div class="card-body">
+          <i class="material-icons text-dark mb-2" style="font-size: 36px;">business_center</i>
+          <h5 class="card-title">Projects</h5>
+          <p class="display-6">{{ projects|length }}</p>
+          <a href="{% url 'task:project_list' %}" class="btn btn-outline-primary btn-sm">View</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-4">
+    <div class="col text-center">
+      <p class="text-muted">You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

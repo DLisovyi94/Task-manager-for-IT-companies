@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>
+    Position list
+    <a href="#" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+  <form method="get" action="">
+      {{ search_form|crispy }}
+      <input class="btn btn-secondary" type="submit" value="Submit">
+  </form>
+  {% if position_list %}
+    <ul>
+  {% for position in position_list %}
+    <li>
+      <strong>{{ position.name }}</strong>
+      <ul>
+        {% for worker in position.worker_set.all %}
+          <li>{{ worker.first_name }} {{ worker.last_name }}</li>
+        {% empty %}
+          <li>No workers assigned</li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+</ul>
+  {% else %}
+    <p>There are no positions in tasks</p>
+  {% endif %}
+{% endblock %}

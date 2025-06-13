@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <!-- Team Info Card -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3 class="card-title text-primary mb-0">Team: {{ team.name }}</h3>
+        <div class="d-flex gap-2">
+          <a href="{% url 'task:team-update' pk=team.id %}" class="btn btn-outline-primary mr-2">
+            <i class="material-icons">edit</i> Update
+          </a>
+
+          <a href="{% url 'task:team-delete' pk=team.id %}" class="btn btn-outline-danger">
+            <i class="material-icons align-middle">delete</i> Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Members Card -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-light text-dark border-bottom">
+      <h5 class="mb-0">Members ({{ team.workers.count }})</h5>
+    </div>
+    <div class="card-body">
+      {% if team.workers.all %}
+        <ul class="list-group list-group-flush">
+          {% for worker in team.workers.all %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>
+                <strong>{{ worker.first_name }} {{ worker.last_name }}</strong>
+                {% if worker.position %} ({{ worker.position }}){% endif %}
+              </span>
+              <a href="{% url 'task:worker-detail' pk=worker.id %}" class="btn btn-sm btn-outline-primary">
+                View profile
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted mb-0">No workers in this team.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Tasks Card -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-light text-dark border-bottom">
+      <h5 class="mb-0">Tasks by Team Members</h5>
+    </div>
+    <div class="card-body">
+      {% if team.workers.all %}
+        {% for worker in team.workers.all %}
+          <div class="mb-4">
+            <h6 class="text-secondary mb-2">{{ worker.first_name }} {{ worker.last_name }}</h6>
+            {% if worker.assigned_tasks.all %}
+              <ul class="list-group">
+                {% for task in worker.assigned_tasks.all %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong>{{ task.name }}</strong><br>
+                      <small>{{ task.task_type.name }} &middot;
+                        Priority: {{ task.priority }} &middot;
+                        Deadline: {{ task.deadline|date:"Y-m-d H:i" }}</small>
+                    </div>
+                    {% if task.is_completed %}
+                      <span class="badge badge-success">Completed</span>
+                    {% else %}
+                      <span class="badge badge-warning">Incomplete</span>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="text-muted mb-0">No tasks assigned.</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted">No workers — no tasks.</p>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

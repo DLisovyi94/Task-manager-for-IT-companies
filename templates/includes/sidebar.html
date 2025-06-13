@@ -1,0 +1,64 @@
+{% load static %}
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="d-flex align-items-center">
+      <img src="{% static 'img/task.png' %}" alt="Task Manager" style="height: 40px;" class="mr-2">
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap justify-content-between align-items-center">
+    <ul class="nav nav-pills d-flex flex-row flex-wrap gap-2 mb-2">
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'task:index' %}">
+          <i class="material-icons">home</i> Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'worker_list' %}active{% endif %}" href="{% url 'task:worker_list' %}">
+          <i class="material-icons">people</i> Workers
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% endif %}" href="{% url 'task:task_list' %}">
+          <i class="material-icons">assignment</i> Tasks
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'team_list' %}active{% endif %}" href="{% url 'task:team_list' %}">
+          <i class="material-icons">groups</i> Teams
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'project_list' %}active{% endif %}" href="{% url 'task:project_list' %}">
+          <i class="material-icons">business_center</i> Projects
+        </a>
+      </li>
+    </ul>
+
+    <div class="d-flex flex-column align-items-start gap-2 px-3 py-2">
+
+  {% if user.is_authenticated %}
+    <div class="d-flex align-items-center gap-2 text-dark">
+      <i class="material-icons text-primary">person</i>
+      <span><strong>{{ user.username }}</strong></span>
+    </div>
+
+    <form method="post" action="{% url 'logout' %}" class="w-100">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-danger btn-sm w-100 d-flex align-items-center gap-2">
+        <i class="material-icons">logout</i> Logout
+      </button>
+    </form>
+
+  {% else %}
+    <a href="{% url 'login' %}?next={{ request.path }}"
+       class="btn btn-primary btn-sm w-100 d-flex align-items-center gap-2">
+      <i class="material-icons">login</i> Login
+    </a>
+  {% endif %}
+
+</div>
+
+  </div>
+</div>

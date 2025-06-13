@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card">
+    <div class="card">
+      <div class="card-header bg-light text-dark border-bottom">
+        <h4 class="mb-0">Worker Details</h4>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row mb-2">
+        <div class="col-md-6"><strong>Username:</strong></div>
+        <div class="col-md-6">{{ worker.username }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-6"><strong>First Name:</strong></div>
+        <div class="col-md-6">{{ worker.first_name }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-6"><strong>Last Name:</strong></div>
+        <div class="col-md-6">{{ worker.last_name }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-6"><strong>Position:</strong></div>
+        <div class="col-md-6">{{ worker.position }}</div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-6"><strong>Teams:</strong></div>
+        <div class="col-md-6">
+          {% for team in worker.teams.all %}
+            <span class="badge badge-info">{{ team.name }}</span>
+          {% empty %}
+            <span class="text-muted">No teams</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <a href="{% url 'task:worker-update' pk=worker.id %}" class="btn btn-outline-primary mr-2">
+          <i class="material-icons">edit</i> Update
+        </a>
+        <a href="{% url 'task:worker-delete' pk=worker.id %}" class="btn btn-outline-danger">
+          <i class="material-icons">delete</i> Delete
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+     <div class="card-header bg-light text-dark border-bottom">
+        <h4 class="mb-0">Complete Tasks</h4>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        {% for task in worker.assigned_tasks.all %}
+          {% if task.is_completed %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>
+                <strong>{{ task.name }}</strong> —
+                {{ task.task_type.name }} —
+                Priority: {{ task.priority }},
+                Deadline: {{ task.deadline|date:"Y-m-d H:i" }}
+              </span>
+              <span class="badge badge-success">Completed</span>
+            </li>
+          {% endif %}
+        {% empty %}
+          <li class="list-group-item text-muted">No completed tasks</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-header bg-light text-dark border-bottom">
+        <h4 class="mb-0">Incomplete Tasks</h4>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        {% for task in worker.assigned_tasks.all %}
+          {% if not task.is_completed %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>
+                <strong>{{ task.name }}</strong> —
+                {{ task.task_type.name }} —
+                Priority: {{ task.priority }},
+                Deadline: {{ task.deadline|date:"Y-m-d H:i" }}
+              </span>
+              <span class="badge badge-warning">Incomplete</span>
+            </li>
+          {% endif %}
+        {% empty %}
+          <li class="list-group-item text-muted">No incomplete tasks</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
