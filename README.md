@@ -4,7 +4,7 @@ This Django project is an internal system designed to manage tasks for developme
 
 ## Check it out!
 
-(You can add a deployed link here later.)
+[Task Manager project deployed to Render] https://task-manager-for-it-companies.onrender.com
 
 ## Installing / Getting started
 
